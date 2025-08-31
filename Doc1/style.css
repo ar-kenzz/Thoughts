@@ -6,26 +6,33 @@
 
 body {
   background-color: #b9b3a9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
   margin: 0;
   font-family: 'EB Garamond', serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
 }
 
 .paper {
   position: relative;
   width: 794px;
-  height: 1123px;
+  max-width: 100%;
   background: radial-gradient(circle at 30% 30%, #fdf5e6 0%, #f3e3b8 100%);
   box-shadow:
     inset 0 2px 6px rgba(0, 0, 0, 0.15),
     inset 20px 0 40px rgba(0, 0, 0, 0.05),
     inset -15px 0 30px rgba(0, 0, 0, 0.08),
     0 0 40px rgba(0, 0, 0, 0.4);
-  padding: 3cm;
-  padding-left: 4cm;
+  padding: 4rem 3rem 3rem 5rem; /* Kiri lebih besar */
   border: 1px solid #cbbfa4;
   border-radius: 5px;
   filter: contrast(1.05) brightness(0.97);
@@ -52,13 +59,13 @@ body {
 }
 
 .top-left {
-  top: 1cm;
-  left: 1cm;
+  top: 1rem;
+  left: 1rem;
 }
 
 .top-right {
-  top: 1cm;
-  right: 1cm;
+  top: 1rem;
+  right: 1rem;
 }
 
 .content {
@@ -84,6 +91,7 @@ body {
 .line {
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .number {
@@ -96,6 +104,35 @@ body {
 
 .text {
   flex: 1;
-  word-spacing: 0.5em; /* <--- tambahkan baris ini */
+  word-spacing: 0.5em;
+  overflow-wrap: break-word;
 }
 
+/* Responsif */
+@media (max-width: 768px) {
+  .paper {
+    padding: 3rem 2rem 2rem 3.5rem;
+  }
+
+  .content {
+    font-size: 14pt;
+  }
+
+  .corner {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .paper {
+    padding: 2rem 1.5rem 1.5rem 2.5rem;
+  }
+
+  .content {
+    font-size: 13pt;
+  }
+
+  .corner {
+    font-size: 11px;
+  }
+}
