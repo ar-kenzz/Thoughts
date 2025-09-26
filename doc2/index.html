@@ -7,11 +7,20 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
 
+    :root {
+      --line-height: 1.8;       /* spasi antar baris */
+      --letter-spacing: 0.03em; /* spasi antar huruf */
+      --word-spacing: 0.1em;    /* spasi antar kata, lebih natural */
+      --title-margin-top: 4rem; /* jarak judul dari atas */
+    }
+
     body {
       font-family: 'EB Garamond', serif;
       margin: 0;
       padding: 2rem 1rem;
-      line-height: 1.8;
+      line-height: var(--line-height);
+      letter-spacing: var(--letter-spacing);
+      word-spacing: var(--word-spacing);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -36,19 +45,25 @@
     h1 {
       text-align: center;
       font-weight: bold;
-      margin-bottom: 2rem;
+      margin: var(--title-margin-top) 0 2rem 0;
       font-size: 2.4rem;
       transition: color 0.6s ease;
+      letter-spacing: var(--letter-spacing);
+      word-spacing: var(--word-spacing);
+      line-height: var(--line-height);
     }
 
     .content {
-      text-align: justify; /* rata kanan kiri */
+      text-align: justify;
       max-width: 850px;
       width: 100%;
       margin: 0 auto;
       padding: 0 1rem;
       flex: 1;
       white-space: pre-line;
+      letter-spacing: var(--letter-spacing);
+      word-spacing: var(--word-spacing);
+      line-height: var(--line-height);
     }
 
     .content span {
@@ -62,7 +77,6 @@
       to { opacity: 1; }
     }
 
-    /* Tombol toggle */
     .toggle-btn {
       position: fixed;
       top: 1rem;
@@ -95,6 +109,9 @@
       margin: 3rem 0 1rem 0;
       color: rgba(150, 150, 150, 0.6);
       transition: color 0.6s ease;
+      letter-spacing: var(--letter-spacing);
+      word-spacing: var(--word-spacing);
+      line-height: var(--line-height);
     }
 
     /* Responsif */
@@ -106,6 +123,7 @@
 
       h1 {
         font-size: 1.8rem;
+        margin-top: 3rem;
       }
 
       .content {
@@ -121,7 +139,6 @@
   </style>
 </head>
 <body class="dark">
-  <!-- Tombol toggle -->
   <button class="toggle-btn" id="toggleBtn" aria-label="Toggle dark mode">🌙</button>
 
   <h1>Cara Menuju Indonesia Emas</h1>
@@ -131,7 +148,7 @@
 
     @Malaka juga harus mendirikan pendidikan tinggi.
 
-   Dengan kedua institusi pendidikan tersebut, maka masyarakat Indonesia akan mendapat pendidikan dengan output yang diperlukan untuk mencapai kemajuan bangsa. Bukan mendapat pendidikan untuk menjadi pekerja tanpa bisa berpikir apa yang dia kerjakan.
+    Dengan kedua institusi pendidikan tersebut, maka masyarakat Indonesia akan mendapat pendidikan dengan output yang diperlukan untuk mencapai kemajuan bangsa. Bukan mendapat pendidikan untuk menjadi pekerja tanpa bisa berpikir apa yang dia kerjakan.
   </div>
 
   <footer>
@@ -145,16 +162,12 @@
     function toggleMode() {
       document.body.classList.toggle('dark');
       document.body.classList.toggle('light');
-      if (document.body.classList.contains('dark')) {
-        btn.textContent = "🌙";
-      } else {
-        btn.textContent = "🌞";
-      }
+      btn.textContent = document.body.classList.contains('dark') ? "🌙" : "🌞";
     }
 
     btn.addEventListener('click', toggleMode);
 
-    // Efek ketikan huruf per huruf dengan spasi terjaga
+    // Efek ketikan huruf per huruf
     const text = content.textContent;
     content.textContent = '';
     text.split('').forEach((char, i) => {
