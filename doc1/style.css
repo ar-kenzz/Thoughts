@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #b9b3a9;
+  margin: 0;
+  font-family: 'EB Garamond', serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.paper {
+  position: relative;
+  width: 794px;
+  max-width: 100%;
+  background: radial-gradient(circle at 30% 30%, #fdf5e6 0%, #f3e3b8 100%);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.15),
+    inset 20px 0 40px rgba(0, 0, 0, 0.05),
+    inset -15px 0 30px rgba(0, 0, 0, 0.08),
+    0 0 40px rgba(0, 0, 0, 0.4);
+  padding: 4rem 3rem 3rem 5rem; /* Kiri lebih besar */
+  border: 1px solid #cbbfa4;
+  border-radius: 5px;
+  filter: contrast(1.05) brightness(0.97);
+  background-blend-mode: multiply;
+  overflow: hidden;
+}
+
+.paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/french-stucco.png");
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.corner {
+  position: absolute;
+  font-size: 14px;
+  font-weight: normal;
+  color: #2c2c2c;
+  z-index: 2;
+}
+
+.top-left {
+  top: 1rem;
+  left: 1rem;
+}
+
+.top-right {
+  top: 1rem;
+  right: 1rem;
+}
+
+.content {
+  color: #111;
+  font-weight: bold;
+  font-size: 16pt;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+}
+
+.center-text {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.left-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+.line {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.number {
+  width: 2em;
+  flex-shrink: 0;
+  text-align: right;
+  padding-right: 0.5em;
+  font-weight: bold;
+}
+
+.text {
+  flex: 1;
+  word-spacing: 0.5em;
+  overflow-wrap: break-word;
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .paper {
+    padding: 3rem 2rem 2rem 3.5rem;
+  }
+
+  .content {
+    font-size: 14pt;
+  }
+
+  .corner {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .paper {
+    padding: 2rem 1.5rem 1.5rem 2.5rem;
+  }
+
+  .content {
+    font-size: 13pt;
+  }
+
+  .corner {
+    font-size: 11px;
+  }
+}

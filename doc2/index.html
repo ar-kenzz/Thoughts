@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catatan</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+    body {
+      font-family: 'EB Garamond', serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.15rem;
+      position: relative;
+      overflow-x: hidden;
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    /* Light mode */
+    body.light {
+      background: #fdfdfd;
+      color: #111;
+    }
+
+    /* Dark mode */
+    body.dark {
+      background: #111;
+      color: #fdfdfd;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      font-size: 2.4rem;
+      transition: color 0.6s ease;
+    }
+
+    .content {
+      text-align: justify; /* rata kanan kiri */
+      max-width: 850px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem;
+      flex: 1;
+      white-space: pre-line;
+    }
+
+    .content span {
+      opacity: 0;
+      display: inline;
+      animation: typeIn 0.02s forwards;
+    }
+
+    @keyframes typeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Tombol toggle */
+    .toggle-btn {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      background: rgba(0,0,0,0.05);
+      color: inherit;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s, color 0.6s ease;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .toggle-btn:hover {
+      transform: rotate(20deg) scale(1.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      background: rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 1rem;
+      margin: 3rem 0 1rem 0;
+      color: rgba(150, 150, 150, 0.6);
+      transition: color 0.6s ease;
+    }
+
+    /* Responsif */
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem 0.5rem;
+        font-size: 1.05rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .content {
+        font-size: 1.05rem;
+      }
+
+      .toggle-btn {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body class="dark">
+  <!-- Tombol toggle -->
+  <button class="toggle-btn" id="toggleBtn" aria-label="Toggle dark mode">🌙</button>
+
+  <h1>Cara Menuju Indonesia Emas</h1>
+
+  <div class="content" id="content">
+    @Zenius.edu harus mendirikan sekolah pada jenjang dasar dan menengah.
+
+    @Malaka juga harus mendirikan pendidikan tinggi.
+
+   Dengan kedua institusi pendidikan tersebut, maka masyarakat Indonesia akan mendapat pendidikan dengan output yang diperlukan untuk mencapai kemajuan bangsa. Bukan mendapat pendidikan untuk menjadi pekerja tanpa bisa berpikir apa yang dia kerjakan.
+  </div>
+
+  <footer>
+    © Arfin Maulana — 25 September 2025
+  </footer>
+
+  <script>
+    const btn = document.getElementById('toggleBtn');
+    const content = document.getElementById('content');
+
+    function toggleMode() {
+      document.body.classList.toggle('dark');
+      document.body.classList.toggle('light');
+      if (document.body.classList.contains('dark')) {
+        btn.textContent = "🌙";
+      } else {
+        btn.textContent = "🌞";
+      }
+    }
+
+    btn.addEventListener('click', toggleMode);
+
+    // Efek ketikan huruf per huruf dengan spasi terjaga
+    const text = content.textContent;
+    content.textContent = '';
+    text.split('').forEach((char, i) => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.style.animationDelay = `${i * 0.02}s`;
+      content.appendChild(span);
+    });
+  </script>
+</body>
+</html>
