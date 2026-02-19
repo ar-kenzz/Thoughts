@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Sisa Kemanusiaan // System Access</title>
+
+  <!-- ==========================================================
+        AREA EDIT KONTEN
+        ========================================================== -->
+  <script>
+    const PAGE_TITLE_TAB = "Sisa Kemanusiaan // System Access"; // Judul di tab browser
+    const INDEX_URL = "https://arfin-maulana.github.io/x/";      // Link tombol kembali
+    
+    // Judul bersih tanpa efek accent
+    const ARTICLE_TITLE = "Sisa Kemanusiaan di Persimpangan Digital";
+    const ARTICLE_DATE = "26 JANUARI 2026";
+    const ARTICLE_AUTHOR = "HILALLUDDIN SAFA";
+    
+    // Isi konten puisi
+    const ARTICLE_CONTENT = `
+      <p>
+        Tinta emas mengalir dari jemari yang menang<br>
+        Menyusun narasi, entah benar atau sekedar pembenaran<br>
+        Sejarah hanyalah dongeng yang dipahat demi eksistensi<br>
+        Diatas imajinasi mereka yang dibungkam oleh sunyi.
+      </p>
+      
+      <blockquote>
+        Kita tumbuh dalam deru yang tergesa-gesa<br>
+        Meminjam hukum Newton demi percepatan yang dipaksa<br>
+        Padahal Sumber Daya masih merangkak, tertatih ditanah<br>
+        Namun dipaksa lari hingga nafasnya pecah dan lelah.<br>
+        Hanya demi mengejar bayang-bayang bernama "PERKEMBANGAN"
+      </blockquote>
+
+      <p>
+        Lihatlah para pemuda di persimpangan jalan<br>
+        Salah pergaulan, atau salah belajar kehidupan?<br>
+        Adat Budaya dianggap rongsokan yang berdebu<br>
+        Mata tertutup rapat, enggan menoleh pada masa lalu
+      </p>
+
+      <blockquote>
+        Mereka haus akan pengakuan, lapar akan Eksistensi<br>
+        Namun tersesat arah, kehilangan kompas diri<br>
+        Segala dilupakan, jati diri digadaikan<br>
+        Hingga tingkah gila dianggap sebuah pencapaian<br>
+        Asal jempol berdatangan memuaskan dahaga ketenaran
+      </blockquote>
+
+      <p>
+        Kini dunia maya lebih nyata dari hembusan nafas<br>
+        Mendominasi jiwa yang semakin terlepas<br>
+        Dunia nyata yang penuh misteri kini ditinggalkan<br>
+        Diganti piksel warna-warni yang penuh kepalsuan
+      </p>
+
+      <blockquote>
+        Peradaban merubah moral jadi barang langka<br>
+        Haus akan Etika ditengah pesta pora angka-angka.<br>
+        Ketimpangan berdiri tegak merobek keadilan<br>
+        Meninggalkan sebuah tanya dalam diri kita<br>
+        <strong>"Apa Yang Tersisa dari Kemanusiaan?"</strong>
+      </blockquote>
+    `;
+  </script>
+
+  <style>
+    :root {
+      --bg-color: #000000;
+      --text-main: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.6);
+      --glass-bg: rgba(10, 10, 10, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.12);
+      --blob-1: #007AFF;
+      --blob-2: #AF52DE;
+      --blob-3: #5856D6;
+      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+      --font-mono: "SF Mono", "Fira Code", monospace;
+    }
+
+    body.light {
+      --bg-color: #f5f5f7;
+      --text-main: #1d1d1f;
+      --text-muted: rgba(60, 60, 67, 0.7);
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(0, 0, 0, 0.1); 
+      --blob-1: #89C4F4;
+      --blob-2: #E0BBE4;
+      --blob-3: #D291BC;
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; cursor: none; }
+
+    body {
+      font-family: var(--font-display);
+      margin: 0; padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background-color 0.8s ease, color 0.8s ease;
+    }
+
+    .noise-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+    .scanlines-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: 1;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.1));
+      background-size: 100% 4px; opacity: 0.15;
+    }
+    .liquid-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.5;
+      animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--blob-1); }
+    .blob-2 { bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: var(--blob-2); animation-delay: -5s; }
+    .blob-3 { top: 40%; right: 20%; width: 40vw; height: 40vw; background: var(--blob-3); opacity: 0.3; animation-delay: -10s; }
+    @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 50px) scale(1.1); } }
+
+    #node-network {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 1; pointer-events: none; opacity: 0.6; mix-blend-mode: screen;
+    }
+    body.light #node-network { mix-blend-mode: multiply; opacity: 0.4; }
+
+    .cursor-outer {
+      position: fixed; width: 40px; height: 40px;
+      border: 1px solid var(--text-muted); border-radius: 50%;
+      pointer-events: none; z-index: 2147483647;
+      transform: translate(-50%, -50%); 
+      transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+      mix-blend-mode: difference;
+    }
+    .cursor-inner {
+      position: fixed; width: 6px; height: 6px;
+      background: var(--text-main); border-radius: 50%;
+      pointer-events: none; z-index: 2147483647;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.3s;
+    }
+    body.hovering .cursor-outer { width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-color: transparent; mix-blend-mode: normal; }
+    body.hovering .cursor-inner { opacity: 0; }
+
+    .nav-bar {
+      position: fixed; top: 0; left: 0; width: 100%;
+      padding: 30px 40px; display: flex; justify-content: space-between; align-items: center;
+      z-index: 100; pointer-events: none; gap: 15px;
+    }
+    .back-btn, .toggle-btn {
+      pointer-events: auto; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border); color: var(--text-main);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease; text-decoration: none;
+    }
+    .back-btn { padding: 12px 24px; border-radius: 100px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; }
+    .toggle-btn { width: 45px; height: 45px; border-radius: 50%; flex-shrink: 0; }
+    .back-btn:hover, .toggle-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+    .doc-wrapper {
+      position: relative; z-index: 10; min-height: 100vh; padding: 120px 20px 100px;
+      display: flex; justify-content: center; align-items: flex-start;
+    }
+
+    .doc-card {
+      width: 100%; max-width: 800px; background: var(--glass-bg);
+      backdrop-filter: blur(30px) saturate(150%); border: 1px solid var(--glass-border);
+      border-radius: 24px; padding: 60px 80px; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+
+    .doc-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid var(--glass-border); padding-bottom: 40px; }
+    .doc-title {
+      font-size: 42px; font-weight: 700; letter-spacing: -1px; margin: 0 0 20px 0; line-height: 1.2;
+      background: linear-gradient(180deg, var(--text-main) 40%, var(--text-muted) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    
+    .doc-meta {
+      font-family: var(--font-mono); font-size: 13px; color: var(--text-muted);
+      display: flex; justify-content: center; align-items: center; gap: 24px; flex-wrap: nowrap; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .doc-meta span { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+
+    .doc-content { font-size: 18px; line-height: 1.8; color: var(--text-main); text-align: justify; overflow-wrap: break-word; }
+    .doc-content p { margin-bottom: 24px; }
+    .doc-content blockquote {
+      border-left: 4px solid var(--blob-1); margin: 30px 0; padding: 10px 20px;
+      background: rgba(255,255,255,0.03); border-radius: 0 8px 8px 0;
+      font-style: italic; color: var(--text-muted);
+    }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media(max-width: 768px) {
+      .nav-bar { padding: 15px 20px; }
+      .back-btn { padding: 10px 16px; font-size: 10px; }
+      .doc-wrapper { padding-top: 90px; }
+      .doc-card { padding: 35px 20px; }
+      .doc-title { font-size: 26px; }
+      .doc-meta { font-size: 10px; gap: 15px; } 
+      .doc-content { font-size: 16px; text-align: left; }
+    }
+  </style>
+</head>
+<body class="dark">
+
+  <div class="cursor-outer"></div>
+  <div class="cursor-inner"></div>
+
+  <div class="noise-overlay"></div>
+  <div class="scanlines-overlay"></div>
+  
+  <div class="liquid-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+  
+  <canvas id="node-network"></canvas>
+
+  <div class="nav-bar">
+    <a href="#" id="render-back-link" class="back-btn" data-hover>< BACK_TO_INDEX //</a>
+    <button class="toggle-btn" id="toggleBtn" data-hover>
+      <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+  </div>
+
+  <div class="doc-wrapper">
+    <article class="doc-card">
+      <header class="doc-header">
+        <h1 class="doc-title" id="render-title">Memuat...</h1>
+        <div class="doc-meta">
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> <span id="render-date">...</span></span>
+          <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> <span id="render-author">...</span></span>
+        </div>
+      </header>
+      <div class="doc-content" id="render-content">...</div>
+    </article>
+  </div>
+
+  <script>
+    document.title = PAGE_TITLE_TAB;
+    document.getElementById('render-back-link').href = INDEX_URL;
+    document.getElementById('render-title').innerHTML = ARTICLE_TITLE;
+    document.getElementById('render-date').innerHTML = ARTICLE_DATE;
+    document.getElementById('render-author').innerHTML = ARTICLE_AUTHOR;
+    document.getElementById('render-content').innerHTML = ARTICLE_CONTENT;
+
+    const hoverSound = new Audio("data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAAAAAAAAAQABAAIAAgACAAIAAgABAAEAAQABAAAA/v/+/wAAAQACAAIAAQAAAAEAAAD+/wAAAQABAAEAAQABAAAAAQABAAAAAQAAAAEAAQABAAAAAQABAAAAAQABAAAAAQABAAAAAQAAAAAAAAD+/wAA/v8AAAAA/v8AAAAAAQAAAAEAAQAAAAAAAAD+/wAAAAABAAAAAQAAAAEAAQAAAAAAAAD+/wAA/v8AAAAA/v8AAAAA/v8AAAEAAQAAAAAAAAD+/wAAAAAAAAAAAQABAAAAAQABAAAAAQABAAAAAQABAAAAAQABAAAAAQAAAAEAAQABAAAAAQABAAAAAQABAAAAAQABAAAAAQAAAAAAAAD+/wAA");
+    const playHoverSound = () => { const s = hoverSound.cloneNode(); s.volume=0.1; s.play().catch(e=>{}); };
+
+    const nodeCanvas = document.getElementById('node-network');
+    const nCtx = nodeCanvas.getContext('2d');
+    let netWidth, netHeight, netMouseX = -1000, netMouseY = -1000;
+    function resize() { netWidth = nodeCanvas.width = window.innerWidth; netHeight = nodeCanvas.height = window.innerHeight; }
+    window.addEventListener('resize', resize); resize();
+    const nodes = [];
+    for(let i=0; i<80; i++) nodes.push({x:Math.random()*netWidth, y:Math.random()*netHeight, vx:(Math.random()-0.5)*0.4, vy:(Math.random()-0.5)*0.4, r:Math.random()*1+0.5});
+    function animate() {
+      nCtx.clearRect(0,0,netWidth,netHeight);
+      const color = document.body.classList.contains('light') ? '0,0,0' : '255,255,255';
+      nCtx.fillStyle = `rgba(${color},0.5)`;
+      nodes.forEach((n,i)=>{
+        n.x+=n.vx; n.y+=n.vy;
+        if(n.x<0||n.x>netWidth) n.vx*=-1; if(n.y<0||n.y>netHeight) n.vy*=-1;
+        nCtx.beginPath(); nCtx.arc(n.x,n.y,n.r,0,Math.PI*2); nCtx.fill();
+        for(let j=i+1; j<nodes.length; j++) {
+          let d = Math.hypot(n.x-nodes[j].x, n.y-nodes[j].y);
+          if(d<120) { nCtx.beginPath(); nCtx.moveTo(n.x,n.y); nCtx.lineTo(nodes[j].x,nodes[j].y); nCtx.strokeStyle=`rgba(${color},${(1-d/120)*0.2})`; nCtx.stroke(); }
+        }
+      });
+      requestAnimationFrame(animate);
+    } animate();
+
+    if(!('ontouchstart' in window)) {
+      const outer = document.querySelector(".cursor-outer"), inner = document.querySelector(".cursor-inner");
+      window.addEventListener("mousemove", e => { 
+        inner.style.left = outer.style.left = e.clientX+'px'; 
+        inner.style.top = outer.style.top = e.clientY+'px'; 
+        netMouseX = e.clientX; netMouseY = e.clientY;
+      });
+      document.body.addEventListener('mouseover', e => { if(e.target.closest('[data-hover]') || e.target.tagName==='A') { document.body.classList.add('hovering'); playHoverSound(); } else { document.body.classList.remove('hovering'); } });
+    } else { document.querySelector(".cursor-outer").style.display = 'none'; document.querySelector(".cursor-inner").style.display = 'none'; }
+
+    const toggleBtn = document.getElementById("toggleBtn");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      const isL = document.body.classList.contains("light");
+      document.getElementById("themeIcon").innerHTML = isL ? '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>' : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+    });
+  </script>
+</body>
+</html>
