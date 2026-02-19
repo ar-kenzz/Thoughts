@@ -3,38 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>Document // System Access</title>
+  <title>Modal Buat Gimmick // System Access</title>
 
   <!-- ==========================================================
-       AREA EDIT KONTEN (GANTI SEMUA TEKS ARTIKEL DI SINI)
-       ========================================================== -->
+        AREA EDIT KONTEN (ISI PUISI DIMASUKKAN DI SINI)
+        ========================================================== -->
   <script>
-    const PAGE_TITLE_TAB = "Revisi Skripsi // System Access"; // Judul di tab browser
-    const INDEX_URL = "../index.html";                        // Link tombol kembali ke halaman utama
+    const PAGE_TITLE_TAB = "Modal Buat Gimmick // System Access"; // Judul di tab browser
+    const INDEX_URL = "https://arfin-maulana.github.io/x/";      // Link tombol kembali diperbarui
     
-    const ARTICLE_TITLE = "Revisi Skripsi: Antara Harapan dan Kenyataan";
-    const ARTICLE_DATE = "24 OKTOBER 2026";
-    const ARTICLE_AUTHOR = "ARFIN MAULANA";
+    // Memberikan class khusus 'accent' pada huruf M, B, dan G
+    const ARTICLE_TITLE = '<span class="accent">M</span>odal <span class="accent">B</span>uat <span class="accent">G</span>immick';
+    const ARTICLE_DATE = "2 FEBRUARI 2026";
+    const ARTICLE_AUTHOR = "HILALLUDDIN SAFA";
     
-    // Isi konten dokumen (Gunakan tag HTML standar seperti <p>, <h2>, <blockquote>)
+    // Isi konten dokumen menggunakan tag HTML standar
     const ARTICLE_CONTENT = `
-      <p>Ganti teks ini dengan paragraf pertama Anda. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>
+        Di sela pembelajaran kelas yang mulai tertata<br>
+        Lonceng bel berbunyi tanda sudah tiba<br>
+        Pengantar datang dengan senyum sumringah<br>
+        Nampan-nampan berjejer mengkilap di depan kamera<br>
+        Berisi protein dan janji manis dari penguasa<br>
+        Dengan menu yang ditanam dari ladang pengambilan dana<br>
+        Merubah konglomerat berlomba untuk lebih kaya
+      </p>
       
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-      <h2>Sub-Judul Dokumen</h2>
-      <p>Anda bisa menambahkan elemen HTML standar di sini seperti paragraf baru, teks tebal <strong>(bold)</strong>, atau tautan <a href="#" data-hover>seperti ini</a>.</p>
-
       <blockquote>
-        "Ini adalah contoh penggunaan blockquote untuk kutipan yang menarik dalam teks Anda. Desainnya sudah disesuaikan agar menyatu dengan tema kaca."
+        Ntah bicara gizi atau gengsi?<br>
+        Triliunan rupiah melayang melintasi negeri<br>
+        Di pundak anak cucu, beban hutang menanti<br>
+        Demi se-ompreng gizi yang mungkin basi<br>
+        Asal syarat semua terdistribusi
       </blockquote>
 
-      <p>Teks kembali ke format paragraf biasa. Pastikan untuk selalu menempatkan atribut <code>data-hover</code> jika Anda menambahkan tautan (link) agar efek kursor kustom tetap bekerja saat link tersebut dilewati oleh mouse.</p>
+      <p>
+        Belajar di kelas kini tak jadi prioritas<br>
+        Hanya menanti makan dari penguasa yang beringas<br>
+        Demi perut yang tak tentram, Anggaran pendidikan dipangkas<br>
+        Anak-anak jadi kenyang dengan cita-cita yang kandas<br>
+        Kebijakan menjadikan otonomi guru terampas<br>
+        Pendidikan gemilang berubah jadi naif dan naas.
+      </p>
     `;
   </script>
   <!-- ==========================================================
-       BATAS AREA EDIT KONTEN
-       ========================================================== -->
+        BATAS AREA EDIT KONTEN
+        ========================================================== -->
 
   <style>
     :root {
@@ -81,9 +96,6 @@
       overflow-x: hidden;
       transition: background-color 0.8s ease, color 0.8s ease;
     }
-
-    noscript { display: block; }
-    noscript * { cursor: auto !important; }
 
     /* ==========================================
        BACKGROUNDS & CANVAS
@@ -151,7 +163,7 @@
       position: fixed; top: 0; left: 0; width: 100%;
       padding: 30px 40px; display: flex; justify-content: space-between; align-items: center;
       z-index: 100; pointer-events: none;
-      gap: 15px; /* Memberi jarak aman jika layar sangat kecil */
+      gap: 15px;
     }
     .back-btn, .toggle-btn {
       pointer-events: auto;
@@ -166,18 +178,18 @@
     }
     .toggle-btn {
       width: 45px; height: 45px; border-radius: 50%;
-      flex-shrink: 0; /* Mencegah tombol mengecil di layar sempit */
+      flex-shrink: 0;
     }
     .back-btn:hover, .toggle-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
     /* ==========================================
-       DOCUMENT CONTAINER (PORTRAIT CARD)
+       DOCUMENT CONTAINER
        ========================================== */
     .doc-wrapper {
       position: relative; z-index: 10;
       min-height: 100vh; padding: 120px 20px 100px;
       display: flex; justify-content: center;
-      align-items: flex-start; /* PENTING: Mencegah kartu memanjang jika teks pendek */
+      align-items: flex-start;
     }
 
     .doc-card {
@@ -198,31 +210,55 @@
     }
     .doc-title {
       font-size: 42px; font-weight: 700; letter-spacing: -1px; margin: 0 0 20px 0; line-height: 1.2;
-      background: linear-gradient(180deg, var(--text-main) 20%, var(--text-muted) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      color: var(--text-main);
     }
+    
+    /* STYLE UNTUK HURUF MENCOLOK (M, B, G) */
+    .accent {
+      position: relative;
+      color: var(--blob-1);
+      text-shadow: 0 0 20px var(--blob-1), 0 0 40px var(--blob-1);
+      font-weight: 900;
+      display: inline-block;
+      padding: 0 4px;
+      transition: all 0.5s ease;
+    }
+    
+    .accent::before {
+      content: '';
+      position: absolute;
+      inset: -5px -2px;
+      background: rgba(0, 122, 255, 0.15);
+      border: 1px solid rgba(0, 122, 255, 0.3);
+      border-radius: 4px;
+      z-index: -1;
+      backdrop-filter: blur(5px);
+    }
+
+    body.light .accent {
+      color: var(--blob-3);
+      text-shadow: 0 0 10px var(--blob-3);
+    }
+    body.light .accent::before {
+      background: rgba(210, 145, 188, 0.1);
+      border-color: rgba(210, 145, 188, 0.3);
+    }
+
     .doc-meta {
       font-family: var(--font-mono); font-size: 13px; color: var(--text-muted);
       display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; text-transform: uppercase; letter-spacing: 1px;
     }
     .doc-meta span { display: flex; align-items: center; gap: 8px; }
 
-    /* ISI KONTEN (JUSTIFY) */
+    /* ISI KONTEN */
     .doc-content {
       font-size: 18px; line-height: 1.8; color: var(--text-main);
       text-align: justify;
       font-weight: 400;
-      /* PENTING: Mencegah link panjang merusak layout di HP */
       overflow-wrap: break-word; 
-      word-wrap: break-word;
     }
     
     .doc-content p { margin-bottom: 24px; }
-    
-    .doc-content h2, .doc-content h3 {
-      text-align: left; margin-top: 40px; margin-bottom: 16px; font-weight: 600;
-      color: var(--text-main);
-    }
 
     .doc-content blockquote {
       border-left: 4px solid var(--blob-1);
@@ -231,30 +267,21 @@
       font-style: italic; color: var(--text-muted);
     }
 
-    .doc-content a { color: var(--blob-1); text-decoration: none; border-bottom: 1px dashed var(--blob-1); cursor: none; }
-    .doc-content a:hover { border-bottom-style: solid; }
-
     @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ==========================================
-       RESPONSIVE DESIGN (MOBILE & TABLET)
+       RESPONSIVE DESIGN
        ========================================== */
     @media(max-width: 768px) {
       .nav-bar { padding: 15px 20px; }
-      .back-btn { 
-        padding: 10px 16px; 
-        font-size: 10px; /* Diperkecil agar tidak tertabrak tombol theme di HP */
-      }
+      .back-btn { padding: 10px 16px; font-size: 10px; }
       .toggle-btn { width: 40px; height: 40px; }
-      
       .doc-wrapper { padding-top: 90px; padding-left: 15px; padding-right: 15px; }
       .doc-card { padding: 35px 20px; border-radius: 20px; }
-      
       .doc-header { margin-bottom: 30px; padding-bottom: 30px; }
       .doc-title { font-size: 28px; }
       .doc-meta { font-size: 11px; flex-direction: column; gap: 10px; align-items: center; }
-      
-      .doc-content { font-size: 16px; line-height: 1.7; }
+      .doc-content { font-size: 16px; line-height: 1.7; text-align: left; }
     }
   </style>
 </head>
@@ -298,9 +325,7 @@
   </div>
 
   <script>
-    // ==========================================
-    // INJEKSI KONTEN DARI AREA EDIT KE HTML
-    // ==========================================
+    // INJEKSI KONTEN
     document.title = PAGE_TITLE_TAB;
     document.getElementById('render-back-link').href = INDEX_URL;
     document.getElementById('render-title').innerHTML = ARTICLE_TITLE;
@@ -308,15 +333,11 @@
     document.getElementById('render-author').innerHTML = ARTICLE_AUTHOR;
     document.getElementById('render-content').innerHTML = ARTICLE_CONTENT;
 
-    // ==========================================
-    // AUDIO SYSTEM
-    // ==========================================
+    // AUDIO
     const hoverSound = new Audio("data:audio/wav;base64,UklGRjIAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAAABmYWN0BAAAAAAAAABkYXRhAAAAAAAAAAAAAQABAAIAAgACAAIAAgABAAEAAQABAAAA/v/+/wAAAQACAAIAAQAAAAEAAAD+/wAAAQABAAEAAQABAAAAAQABAAAAAQAAAAEAAQABAAAAAQABAAAAAQABAAAAAQABAAAAAQAAAAAAAAD+/wAA/v8AAAAA/v8AAAAAAQAAAAEAAQAAAAAAAAD+/wAAAAABAAAAAQAAAAEAAQAAAAAAAAD+/wAA/v8AAAAA/v8AAAAA/v8AAAEAAQAAAAAAAAD+/wAAAAAAAAAAAQABAAAAAQABAAAAAQABAAAAAQABAAAAAQABAAAAAQAAAAEAAQABAAAAAQABAAAAAQABAAAAAQABAAAAAQAAAAAAAAD+/wAA");
     const playHoverSound = () => { const s = hoverSound.cloneNode(); s.volume=0.1; s.play().catch(e=>{}); };
 
-    // ==========================================
-    // NODE NETWORK (Visibilitas Ditingkatkan)
-    // ==========================================
+    // NODE NETWORK
     const nodeCanvas = document.getElementById('node-network');
     const nCtx = nodeCanvas.getContext('2d');
     let netWidth, netHeight;
@@ -333,9 +354,8 @@
     resizeNetwork();
 
     const nodes = [];
-    const maxNodes = 90; // Ditambah sedikit agar jaring lebih padat
-    const calcNodes = Math.floor((window.innerWidth * window.innerHeight) / 14000);
-    const numNodes = Math.min(calcNodes, maxNodes);
+    const maxNodes = 90;
+    const numNodes = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 14000), maxNodes);
 
     for(let i = 0; i < numNodes; i++) {
         nodes.push({
@@ -343,7 +363,7 @@
             y: Math.random() * netHeight,
             vx: (Math.random() - 0.5) * 0.4, 
             vy: (Math.random() - 0.5) * 0.4,
-            radius: Math.random() * 1.5 + 0.8 // Titik dibuat sedikit lebih besar
+            radius: Math.random() * 1.5 + 0.8
         });
     }
 
@@ -351,15 +371,11 @@
         nCtx.clearRect(0, 0, netWidth, netHeight);
         const isLightMode = document.body.classList.contains('light');
         const colorBase = isLightMode ? '0, 0, 0' : '0, 255, 65'; 
-        
-        // Titik node dibuat lebih solid (opacity 0.8)
         nCtx.fillStyle = `rgba(${colorBase}, 0.8)`;
 
         for(let i = 0; i < numNodes; i++) {
             let n = nodes[i];
-            n.x += n.vx;
-            n.y += n.vy;
-
+            n.x += n.vx; n.y += n.vy;
             if(n.x < 0 || n.x > netWidth) n.vx *= -1;
             if(n.y < 0 || n.y > netHeight) n.vy *= -1;
 
@@ -374,8 +390,7 @@
                     nCtx.beginPath();
                     nCtx.moveTo(n.x, n.y);
                     nCtx.lineTo(n2.x, n2.y);
-                    nCtx.lineWidth = 0.8; // Garis antar node dipertebal
-                    // Warna garis antar node diperjelas
+                    nCtx.lineWidth = 0.8;
                     nCtx.strokeStyle = `rgba(${colorBase}, ${(1 - dist/130) * 0.4})`;
                     nCtx.stroke();
                 }
@@ -386,8 +401,7 @@
                 nCtx.beginPath();
                 nCtx.moveTo(n.x, n.y);
                 nCtx.lineTo(netMouseX, netMouseY);
-                nCtx.lineWidth = 1.2; // Garis ke kursor mouse dipertebal
-                // Warna garis ke mouse diperjelas
+                nCtx.lineWidth = 1.2;
                 nCtx.strokeStyle = `rgba(${colorBase}, ${(1 - distMouse/160) * 0.6})`;
                 nCtx.stroke();
             }
@@ -396,24 +410,17 @@
     }
     drawNetwork();
 
-    // ==========================================
-    // CUSTOM CURSOR & HOVER EFFECTS
-    // ==========================================
+    // CURSOR
     let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    
     if (!isTouchDevice) {
         const outer = document.querySelector(".cursor-outer");
         const inner = document.querySelector(".cursor-inner");
-        
         window.addEventListener("mousemove", e => {
           const x = e.clientX; const y = e.clientY;
           inner.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
           outer.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-          
-          netMouseX = x; 
-          netMouseY = y;
+          netMouseX = x; netMouseY = y;
         });
-
         document.body.addEventListener('mouseover', (e) => {
           if(e.target.closest('[data-hover]') || e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
             document.body.classList.add('hovering');
@@ -428,21 +435,14 @@
         document.body.style.cursor = 'auto';
     }
 
-    // ==========================================
-    // THEME TOGGLE
-    // ==========================================
+    // THEME
     const toggleBtn = document.getElementById("toggleBtn");
     const themeIcon = document.getElementById("themeIcon");
     let isDark = true;
-    
     toggleBtn.addEventListener("click", () => {
       isDark = !isDark;
       document.body.className = isDark ? "dark" : "light";
-      if(!isDark) {
-        themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
-      } else {
-        themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
-      }
+      themeIcon.innerHTML = isDark ? '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>' : '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
     });
   </script>
 </body>
