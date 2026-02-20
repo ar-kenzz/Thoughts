@@ -10,7 +10,6 @@
         ========================================================== -->
   <script>
     const PAGE_TITLE_TAB = "Modal Buat Gimmick // System Access"; // Judul di tab browser
-    const INDEX_URL = "https://arfin-maulana.github.io/x/";      // Link tombol kembali diperbarui
     
     // Memberikan class khusus 'accent' pada huruf M, B, dan G
     const ARTICLE_TITLE = '<span class="accent">M</span>odal <span class="accent">B</span>uat <span class="accent">G</span>immick';
@@ -161,26 +160,20 @@
        ========================================== */
     .nav-bar {
       position: fixed; top: 0; left: 0; width: 100%;
-      padding: 30px 40px; display: flex; justify-content: space-between; align-items: center;
+      padding: 30px 40px; display: flex; justify-content: flex-end; align-items: center;
       z-index: 100; pointer-events: none;
       gap: 15px;
     }
-    .back-btn, .toggle-btn {
+    .toggle-btn {
       pointer-events: auto;
       background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
       border: 1px solid var(--glass-border); color: var(--text-main);
       display: flex; align-items: center; justify-content: center;
       transition: all 0.3s ease; overflow: hidden; cursor: none; text-decoration: none;
-    }
-    .back-btn {
-      padding: 12px 24px; border-radius: 100px;
-      font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px;
-    }
-    .toggle-btn {
       width: 45px; height: 45px; border-radius: 50%;
       flex-shrink: 0;
     }
-    .back-btn:hover, .toggle-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .toggle-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
 
     /* ==========================================
        DOCUMENT CONTAINER
@@ -274,7 +267,6 @@
        ========================================== */
     @media(max-width: 768px) {
       .nav-bar { padding: 15px 20px; }
-      .back-btn { padding: 10px 16px; font-size: 10px; }
       .toggle-btn { width: 40px; height: 40px; }
       .doc-wrapper { padding-top: 90px; padding-left: 15px; padding-right: 15px; }
       .doc-card { padding: 35px 20px; border-radius: 20px; }
@@ -302,7 +294,6 @@
   <canvas id="node-network"></canvas>
 
   <div class="nav-bar">
-    <a href="#" id="render-back-link" class="back-btn" data-hover>< BACK_TO_INDEX //</a>
     <button class="toggle-btn" id="toggleBtn" data-hover>
       <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
     </button>
@@ -327,7 +318,6 @@
   <script>
     // INJEKSI KONTEN
     document.title = PAGE_TITLE_TAB;
-    document.getElementById('render-back-link').href = INDEX_URL;
     document.getElementById('render-title').innerHTML = ARTICLE_TITLE;
     document.getElementById('render-date').innerHTML = ARTICLE_DATE;
     document.getElementById('render-author').innerHTML = ARTICLE_AUTHOR;
