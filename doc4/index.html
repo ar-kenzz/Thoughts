@@ -10,7 +10,6 @@
         ========================================================== -->
   <script>
     const PAGE_TITLE_TAB = "Sisa Kemanusiaan // System Access"; // Judul di tab browser
-    const INDEX_URL = "https://arfin-maulana.github.io/x/";      // Link tombol kembali
     
     // Judul bersih tanpa efek accent
     const ARTICLE_TITLE = "Sisa Kemanusiaan di Persimpangan Digital";
@@ -148,18 +147,17 @@
 
     .nav-bar {
       position: fixed; top: 0; left: 0; width: 100%;
-      padding: 30px 40px; display: flex; justify-content: space-between; align-items: center;
+      padding: 30px 40px; display: flex; justify-content: flex-end; align-items: center;
       z-index: 100; pointer-events: none; gap: 15px;
     }
-    .back-btn, .toggle-btn {
+    .toggle-btn {
       pointer-events: auto; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
       border: 1px solid var(--glass-border); color: var(--text-main);
       display: flex; align-items: center; justify-content: center;
       transition: all 0.3s ease; text-decoration: none;
+      width: 45px; height: 45px; border-radius: 50%; flex-shrink: 0;
     }
-    .back-btn { padding: 12px 24px; border-radius: 100px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; }
-    .toggle-btn { width: 45px; height: 45px; border-radius: 50%; flex-shrink: 0; }
-    .back-btn:hover, .toggle-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+    .toggle-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
     .doc-wrapper {
       position: relative; z-index: 10; min-height: 100vh; padding: 120px 20px 100px;
@@ -198,7 +196,6 @@
 
     @media(max-width: 768px) {
       .nav-bar { padding: 15px 20px; }
-      .back-btn { padding: 10px 16px; font-size: 10px; }
       .doc-wrapper { padding-top: 90px; }
       .doc-card { padding: 35px 20px; }
       .doc-title { font-size: 26px; }
@@ -224,7 +221,6 @@
   <canvas id="node-network"></canvas>
 
   <div class="nav-bar">
-    <a href="#" id="render-back-link" class="back-btn" data-hover>< BACK_TO_INDEX //</a>
     <button class="toggle-btn" id="toggleBtn" data-hover>
       <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
     </button>
@@ -245,7 +241,7 @@
 
   <script>
     document.title = PAGE_TITLE_TAB;
-    document.getElementById('render-back-link').href = INDEX_URL;
+    
     document.getElementById('render-title').innerHTML = ARTICLE_TITLE;
     document.getElementById('render-date').innerHTML = ARTICLE_DATE;
     document.getElementById('render-author').innerHTML = ARTICLE_AUTHOR;
@@ -284,7 +280,7 @@
         inner.style.top = outer.style.top = e.clientY+'px'; 
         netMouseX = e.clientX; netMouseY = e.clientY;
       });
-      document.body.addEventListener('mouseover', e => { if(e.target.closest('[data-hover]') || e.target.tagName==='A') { document.body.classList.add('hovering'); playHoverSound(); } else { document.body.classList.remove('hovering'); } });
+      document.body.addEventListener('mouseover', e => { if(e.target.closest('[data-hover]') || e.target.tagName==='A' || e.target.tagName==='BUTTON') { document.body.classList.add('hovering'); playHoverSound(); } else { document.body.classList.remove('hovering'); } });
     } else { document.querySelector(".cursor-outer").style.display = 'none'; document.querySelector(".cursor-inner").style.display = 'none'; }
 
     const toggleBtn = document.getElementById("toggleBtn");
