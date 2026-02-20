@@ -10,7 +10,7 @@
         ========================================================== -->
   <script>
     const PAGE_TITLE_TAB = "Kado HUT RI Ke-80 // System Access"; // Judul di tab browser
-    const INDEX_URL = "https://arfin-maulana.github.io/x/";      // Link tombol kembali
+    const INDEX_URL = "https://arfin-maulana.github.io/x/";      // Link fallback
     
     // Judul bersih tanpa efek accent
     const ARTICLE_TITLE = "Kado HUT RI Ke-80";
@@ -260,7 +260,21 @@
 
   <script>
     document.title = PAGE_TITLE_TAB;
-    document.getElementById('render-back-link').href = INDEX_URL;
+    
+    // Injeksi URL ke fallback
+    const backBtn = document.getElementById('render-back-link');
+    backBtn.href = INDEX_URL;
+    
+    // PERBAIKAN: Fungsi klik agar tombol bertindak seperti "Back" bawaan HP
+    backBtn.addEventListener('click', function(e) {
+      e.preventDefault(); // Mencegah reload web dari awal
+      if (window.history.length > 1) {
+        window.history.back(); // Jika ada riwayat, kembali ke halaman sebelumnya
+      } else {
+        window.location.href = INDEX_URL; // Fallback jika dibuka di tab baru
+      }
+    });
+
     document.getElementById('render-title').innerHTML = ARTICLE_TITLE;
     document.getElementById('render-date').innerHTML = ARTICLE_DATE;
     document.getElementById('render-author').innerHTML = ARTICLE_AUTHOR;
